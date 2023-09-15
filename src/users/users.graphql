@@ -1,0 +1,40 @@
+type User {
+    _id: ID!
+    name: String
+    email: String
+    lastName: String
+    password: String
+    isLogin: Boolean
+}
+
+input CreateUserInput {
+  # Example field (placeholder)
+    name: String
+    email: String
+    lastName: String
+    password: String
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  lastName: String
+  password: String
+}
+type PaginationResponse {
+  users: [User]
+  totalPage: Int
+  currentPage: Int
+
+}
+type Query {
+  users: [User]!
+  user(id: ID!): User
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  paginationUsers(page: Int, limit: Int):PaginationResponse!
+  removeUser(id: Int!): User
+}
