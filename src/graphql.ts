@@ -22,6 +22,25 @@ export class UpdateUserInput {
     password?: Nullable<string>;
 }
 
+export class LoginResponse {
+    message?: Nullable<string>;
+    token?: Nullable<string>;
+}
+
+export class LogoutResponse {
+    message?: Nullable<string>;
+}
+
+export abstract class IQuery {
+    abstract login(email?: Nullable<string>, password?: Nullable<string>): LoginResponse | Promise<LoginResponse>;
+
+    abstract logout(email?: Nullable<string>): LogoutResponse | Promise<LogoutResponse>;
+
+    abstract users(): Nullable<User>[] | Promise<Nullable<User>[]>;
+
+    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
 export class User {
     _id: string;
     name?: Nullable<string>;
@@ -35,12 +54,6 @@ export class PaginationResponse {
     users?: Nullable<Nullable<User>[]>;
     totalPage?: Nullable<number>;
     currentPage?: Nullable<number>;
-}
-
-export abstract class IQuery {
-    abstract users(): Nullable<User>[] | Promise<Nullable<User>[]>;
-
-    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export abstract class IMutation {

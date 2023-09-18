@@ -22,6 +22,9 @@ export class User {
 
   @Prop({ required: true, default: false })
   active: boolean;
+
+  @Prop({ required: true, default: false })
+  isLogin: boolean;
 }
 
 export type UserDocument = User & mongoose.Document;

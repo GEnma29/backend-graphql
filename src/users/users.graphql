@@ -27,6 +27,7 @@ type PaginationResponse {
   currentPage: Int
 
 }
+
 type Query {
   users: [User]!
   user(id: ID!): User

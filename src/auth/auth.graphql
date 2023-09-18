@@ -1,0 +1,11 @@
+type LoginResponse {
+    message: String
+    token: String
+}
+type LogoutResponse {
+    message: String
+}
+type Query {
+  login(email:String, password: String):LoginResponse!
+  logout(email:String):LogoutResponse!
+}

@@ -1,13 +1,19 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UsersModule } from './users/users.module';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
+import { AuthModule } from './auth/auth.module';
 
+console.log(process.env.MONGO_URI);
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
@@ -16,10 +22,9 @@ import { join } from 'path';
         outputAs: 'class',
       },
     }),
-    MongooseModule.forRoot(
-      'mongodb+srv://UserTest:VS62RbHj27jcOGq0@cluster0.kkmeoiw.mongodb.net/?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     UsersModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [AppService],
