@@ -26,6 +26,9 @@ export class UsersService {
   async findAll() {
     return await this.userModel.find({});
   }
+  async findUserLogin() {
+    return await this.userModel.find({ isLogin: true });
+  }
 
   async userLogin(id: string) {
     const user = await this.userModel.findByIdAndUpdate(

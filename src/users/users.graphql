@@ -31,6 +31,7 @@ type PaginationResponse {
 type Query {
   users: [User]!
   user(id: ID!): User
+  usersLogin: [User]!
 }
 
 type Mutation {
